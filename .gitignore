@@ -12,4 +12,5 @@ coverage.xml
 
 # Mypy cache
 .mypy_cache/
+.idea
 
