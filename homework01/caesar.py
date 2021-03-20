@@ -27,10 +27,10 @@ def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
                 if f == -1:
                     ciphertext += i
                 else:
-                    res = (f+shift)%len(string.ascii_uppercase)
+                    res = (f + shift) % len(string.ascii_uppercase)
                     ciphertext += string.ascii_uppercase[res]
             else:
-                res = (f+shift)%len(string.ascii_lowercase)
+                res = (f + shift) % len(string.ascii_lowercase)
                 ciphertext += string.ascii_lowercase[res]
     return ciphertext
 
