@@ -44,7 +44,7 @@ def group(values: tp.List[T], n: int) -> tp.List[tp.List[T]]:
     >>> group([1,2,3,4,5,6,7,8,9], 3)
     [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
     """
-    return [values[i: i + n] for i in range(0, len(values), n)]
+    return [values[i : i + n] for i in range(0, len(values), n)]
 
 
 def get_row(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.List[str]:
@@ -117,10 +117,10 @@ def find_possible_values(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -
     True
     """
     values = (
-            set("123456789")
-            - set(get_row(grid, pos))
-            - set(get_col(grid, pos))
-            - set(get_block(grid, pos))
+        set("123456789")
+        - set(get_row(grid, pos))
+        - set(get_col(grid, pos))
+        - set(get_block(grid, pos))
     )
     return values
 
@@ -166,7 +166,7 @@ def check_solution(solution: tp.List[tp.List[str]]) -> bool:
     block_size = math.floor(math.sqrt(len(solution)))
 
     for i in range(0, len(solution), block_size):
-        for j in range(0,len(solution), block_size):
+        for j in range(0, len(solution), block_size):
             values_in_block = set(get_block(solution, (i, j)))
             if values_in_block != set("123456789"):
                 return False
