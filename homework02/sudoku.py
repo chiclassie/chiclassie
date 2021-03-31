@@ -1,7 +1,7 @@
-import pathlib
-import typing as tp
 import math
+import pathlib
 import random
+import typing as tp
 
 T = tp.TypeVar("T")
 
