@@ -55,7 +55,7 @@ class GUI(UI):
         running = True
         while running:
             for event in pygame.event.get():
-                if event.type == QUIT:
+                if event.type == pygame.QUIT:
                     running = False
                 elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                     paused = not paused
@@ -64,7 +64,7 @@ class GUI(UI):
 
             if paused:
                 for event in pygame.event.get():
-                    if event.type == QUIT:
+                    if event.type == pygame.QUIT:
                         running = False
                     elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                         paused = not paused
