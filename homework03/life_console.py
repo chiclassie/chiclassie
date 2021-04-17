@@ -20,16 +20,17 @@ class Console(UI):
         line = ""
         for row in range(height):
             for col in range(width):
-                if row == 0 or row == height - 1:
+                if row != height - 1 and row != 0:
+                    if row > 0 and (row + 1) > height:
+                        if col == 0 or col == width - 1:
+                            line += "|"
+                        else:
+                            line += " "
+                else:
                     if col == 0 or col == width - 1:
                         line += "+"
                     else:
                         line += "-"
-                elif row > 0 & row < (height - 1):
-                    if col == 0 or col == width - 1:
-                        line += "|"
-                    else:
-                        line += " "
 
             try:
                 screen.addstr(line)
