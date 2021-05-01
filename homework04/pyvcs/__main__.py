@@ -1,3 +1,4 @@
+#  type: ignore
 import argparse
 import pathlib
 
@@ -97,7 +98,11 @@ def add_update_index_subparser(subparsers) -> None:
         "update-index", help="Add file contents to the index."
     )
     update_index_subparser.add_argument(
-        "paths", nargs="+", metavar="path", type=pathlib.Path, help="path(s) of files to add"
+        "paths",
+        nargs="+",
+        metavar="path",
+        type=pathlib.Path,
+        help="path(s) of files to add",
     )
     update_index_subparser.add_argument(
         "--add",

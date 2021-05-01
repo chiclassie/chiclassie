@@ -1,8 +1,8 @@
+#  type: ignore
 import os
 import pathlib
 
 from pyfakefs.fake_filesystem_unittest import TestCase
-
 from pyvcs import repo
 
 
