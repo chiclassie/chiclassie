@@ -10,9 +10,7 @@ from pyvcs.objects import hash_object
 from pyvcs.refs import get_ref, is_detached, resolve_head, update_ref
 
 
-def write_tree(
-    gitdir: pathlib.Path, index: tp.List[GitIndexEntry], dirname: str = ""
-) -> str:
+def write_tree(gitdir: pathlib.Path, index: tp.List[GitIndexEntry], dirname: str = "") -> str:
     structure_of_tree = []
     tree_sidings = dict()
     files = []
@@ -39,9 +37,7 @@ def write_tree(
                 (
                     filler,
                     str(gitdir.parent / dirname / name),
-                    bytes.fromhex(
-                        write_tree(gitdir, tree_sidings[name], dirname + "/" + name)
-                    ),
+                    bytes.fromhex(write_tree(gitdir, tree_sidings[name], dirname + "/" + name)),
                 )
             )
         else:
@@ -68,35 +64,23 @@ def commit_tree(
     author: tp.Optional[str] = None,
 ) -> str:
 
-    if (
-        "GIT_AUTHOR_NAME" in os.environ
-        and "GIT_AUTHOR_EMAIL" in os.environ
-        and author is None
-    ):
+    if "GIT_AUTHOR_NAME" in os.environ and "GIT_AUTHOR_EMAIL" in os.environ and author is None:
         author = (
-            os.getenv("GIT_AUTHOR_NAME")
-            + " "
-            + f'<{os.getenv("GIT_AUTHOR_EMAIL")}>'  # type:ignore
+            os.getenv("GIT_AUTHOR_NAME") + " " + f'<{os.getenv("GIT_AUTHOR_EMAIL")}>'
         )  # type:ignore
     if time.timezone > 0:
         timezone_bool = "-"
     else:
         timezone_bool = "+"
 
-    timezone_bool += (
-        f"{abs(time.timezone) // 3600:02}{abs(time.timezone) // 60 % 60:02}"
-    )
+    timezone_bool += f"{abs(time.timezone) // 3600:02}{abs(time.timezone) // 60 % 60:02}"
     commited_data = []
     commited_data.append(f"tree {tree}")
 
     if parent is not None:
         commited_data.append(f"parent {parent}")
-    commited_data.append(
-        f"author {author} {int(time.mktime(time.localtime()))} {timezone_bool}"
-    )
+    commited_data.append(f"author {author} {int(time.mktime(time.localtime()))} {timezone_bool}")
 
-    commited_data.append(
-        f"committer {author} {int(time.mktime(time.localtime()))} {timezone_bool}"
-    )
+    commited_data.append(f"committer {author} {int(time.mktime(time.localtime()))} {timezone_bool}")
     commited_data.append(f"\n{message}\n")
     return hash_object("\n".join(commited_data).encode(), "commit", write=True)

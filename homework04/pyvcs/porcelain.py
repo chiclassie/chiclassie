@@ -39,9 +39,7 @@ def checkout(gitdir: pathlib.Path, obj_name: str) -> None:
     data_of_commit = commit_parse(read_object(obj_name, gitdir)[1])
     flag_1 = True
     while flag_1:
-        tree_data = [
-            (gitdir.parent, read_tree(read_object(data_of_commit["tree"], gitdir)[1]))
-        ]
+        tree_data = [(gitdir.parent, read_tree(read_object(data_of_commit["tree"], gitdir)[1]))]
         while len(tree_data) != 0:
             tree_path, tree_content = tree_data.pop()
             for file_data in tree_content:
@@ -56,9 +54,7 @@ def checkout(gitdir: pathlib.Path, obj_name: str) -> None:
                             f.write(data)
                         (tree_path / file_data[2]).chmod(file_data[0])
         if "parent" in data_of_commit:
-            data_of_commit = commit_parse(
-                (read_object(data_of_commit["parent"], gitdir)[1])
-            )
+            data_of_commit = commit_parse((read_object(data_of_commit["parent"], gitdir)[1]))
         else:
             flag_1 = False
     for remove_part in gitdir.parent.glob("*"):

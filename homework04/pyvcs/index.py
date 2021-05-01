@@ -96,6 +96,7 @@ def write_index(gitdir: pathlib.Path, entries: tp.List[GitIndexEntry]) -> None:
     with open(gitdir / "index", "wb") as f:
         f.write(result)
 
+
 def ls_files(gitdir: pathlib.Path, details: bool = False) -> None:
     if details:
         indexes = read_index(gitdir)
@@ -114,9 +115,7 @@ def ls_files(gitdir: pathlib.Path, details: bool = False) -> None:
         print("\n".join(file_names))
 
 
-def update_index(
-    gitdir: pathlib.Path, paths: tp.List[pathlib.Path], write: bool = True
-) -> None:
+def update_index(gitdir: pathlib.Path, paths: tp.List[pathlib.Path], write: bool = True) -> None:
     entrances = read_index(gitdir)
     for path in paths:
         with path.open("rb") as f:
